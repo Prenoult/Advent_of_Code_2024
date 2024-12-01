@@ -4,25 +4,15 @@ import os
 with open('./Day 1/input.txt', 'r') as file:
     content = file.read().splitlines()
 
-first_numbers = []
-second_numbers = []
-
-for line in content:
-    if line.strip(): 
-        numbers = line.split()
-        first_numbers.append(int(numbers[0]))
-        second_numbers.append(int(numbers[1]))
-
-first_numbers.sort()
-second_numbers.sort()
+first_numbers = sorted([int(line.split()[0]) for line in content if line.strip()]) 
+second_numbers = sorted([int(line.split()[1]) for line in content if line.strip()]) 
 
 def calculate_differences (list1, list2):
     return [abs(a - b) for a, b in zip(list1, list2)]
 
 differences = calculate_differences(first_numbers, second_numbers)
 
-# res part 1
-print(sum(differences))
+print("Part 1: ", sum(differences))
 
 # part 2
 def calculate_similarity_scores(list1, list2):
@@ -32,5 +22,4 @@ def calculate_similarity_scores(list1, list2):
         similarity_scores.append(num * occurrence)
     return similarity_scores
 
-# res part 2
-print(sum(calculate_similarity_scores(first_numbers, second_numbers)))
+print("Part 2: ", sum(calculate_similarity_scores(first_numbers, second_numbers)))
