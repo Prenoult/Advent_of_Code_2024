@@ -1,5 +1,3 @@
-import os
-
 # part 1
 with open('./Day 1/input.txt', 'r') as file:
     content = file.read().splitlines()
