@@ -24,3 +24,22 @@ def count_safe_reports(list):
     return reports.count(True)
 
 print("Part 1: ", count_safe_reports(content))
+
+# part 2
+def get_sub_lists(list):
+    return [list[:i] + list[i+1:] for i in range(len(list))]
+
+def count_safe_reports_with_tolerance(list):
+    reports = []
+    for line in list:
+        numbers = [int(number) for number in line.split()]
+        if not is_report_safe(numbers):
+            for sub_list in get_sub_lists(numbers):
+                if is_report_safe(sub_list):
+                    reports.append(True)
+                    break
+        else:
+            reports.append(True)
+    return reports.count(True)
+
+print("Part 2: ", count_safe_reports_with_tolerance(content))
