@@ -34,3 +34,38 @@ def count_word_in_grid(grid, word):
     return count
 
 print("Part 1: ", count_word_in_grid(grid, "XMAS"))
+
+# part 2
+def conditionA(grid, x, y):
+  return (grid[x-1][y-1] == "M" and grid[x-1][y+1] == "M" and 
+          grid[x+1][y-1] == "S" and grid[x+1][y+1] == "S")
+
+def conditionB(grid, x, y):
+  return (grid[x-1][y-1] == "S" and grid[x-1][y+1] == "S" and 
+          grid[x+1][y-1] == "M" and grid[x+1][y+1] == "M")
+
+def conditionC(grid, x, y):
+  return (grid[x-1][y-1] == "M" and grid[x-1][y+1] == "S" and 
+          grid[x+1][y-1] == "M" and grid[x+1][y+1] == "S") 
+
+def conditionD(grid, x, y):
+  return (grid[x-1][y-1] == "S" and grid[x-1][y+1] == "M" and 
+          grid[x+1][y-1] == "S" and grid[x+1][y+1] == "M") 
+
+def find_xmas(grid):
+  rows, cols = len(grid), len(grid[0])
+  count = 0
+
+  for x in range(1, rows - 1):
+    for y in range(1, cols - 1):
+      if (
+        grid[x][y] == "A" and 
+        (conditionA(grid, x, y) or conditionB(grid, x, y) or 
+         conditionC(grid, x, y) or conditionD(grid, x, y))
+      ):
+         count += 1
+  
+  return count
+
+print("Part 2: ", find_xmas(grid))
+
